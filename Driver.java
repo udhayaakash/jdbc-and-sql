@@ -1,46 +1,42 @@
-package jdbc1;
-
+package jdbcdemo;
+import java.io.*;
 import java.sql.*;
-
-public class Driver {
-
-	public static void main(String[] args) throws SQLException {
-
-		Connection myConn = null;
-		Statement myStmt = null;
-		ResultSet myRs = null;
+import java.util.*;
+public class Driver extends input {
+	protected static int t;
+	public static void main(String[] args) throws SQLException ,IOException {
 		
-		try {
-			// 1. Get a connection to database
-			myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/demo", "student" , "student");
-			
-			// 2. Create a statement
-			myStmt = myConn.createStatement();
-			
-			// 3. Execute SQL query
-			myRs = myStmt.executeQuery("select * from employees");
-			
-			// 4. Process the result set
-			while (myRs.next()) {
-				System.out.println(myRs.getString("last_name") + ", " + myRs.getString("first_name"));
-			}
-		}
-		catch (Exception exc) {
-			exc.printStackTrace();
-		}
-		finally {
-			if (myRs != null) {
-				myRs.close();
-			}
-			
-			if (myStmt != null) {
-				myStmt.close();
-			}
-			
-			if (myConn != null) {
-				myConn.close();
-			}
-		}
+		
+        Dept_seg ob = new Dept_seg();
+        //ob.department();
+        input i = new input();
+        i.getInput();
+        Hostel_allocate cs = new Hostel_allocate(nof,nor,block); 
+        cs.allocate();
+        System.out.println("Enter 1 if you want to search, anyother number to terminate");
+        Scanner in=new Scanner(System.in);
+        t= in.nextInt();
+        while(t==1) {
+        	if(t==1) {
+            	
+            	System.out.println("Enter the name and department");
+            	String name= in.next();
+            	String dept = in.next();
+            	i.Search(name, dept);
+        
+        }
+        	 System.out.println("\nEnter 1 if you want to search, anyother number to terminate");
+        	 String r= in.next();
+             if(r.charAt(0)=='1')
+            	 t=Integer.parseInt(r);
+             else
+            	 t=0;
+        }
+        System.out.println("Operation terminated");
+		
 	}
 
 }
+
+
+
